@@ -15,6 +15,7 @@ namespace QL_NhaTro
     {
         private ThuePhong tp = new ThuePhong();
         private Phong ph = new Phong();
+        private KhachHang khang = new KhachHang();
         DB db = new DB();
         public frmThemHopDong()
         {
@@ -37,6 +38,7 @@ namespace QL_NhaTro
         private void btn_them_Click(object sender, EventArgs e)
         {
             SqlTransaction transaction;
+            db.openConnection();
             try
             {
                 if (tb_coc.Text.Trim() == "" || tb_tien.Text.Trim() == "" || tb_kh.Text.Trim() == "")
@@ -45,7 +47,7 @@ namespace QL_NhaTro
                     return;
                 }
 
-                if ((ngthue.Value - ngtra.Value).TotalDays < 180)
+                if ((ngtra.Value - ngthue.Value).TotalDays < 180)
                 {
                     MessageBox.Show("Ngày trả phải lớn hơn ngày thuê 180 ngày (6 tháng)", "Thêm Hợp đồng", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -57,7 +59,9 @@ namespace QL_NhaTro
                 int coc = Convert.ToInt32(tb_coc.Text);
                 int tien = Convert.ToInt32(tb_tien.Text);
                 transaction = db.getConnection.BeginTransaction();
-                if (tp.Insert(kh, phong, thue, tra, coc, tien) && ph.UpdateTrangthai(phong, "Bận"))
+                if (tp.Insert(kh, phong, thue, tra, coc, tien) 
+                    && ph.UpdateTrangthai(phong, "Bận") 
+                    && khang.CapNhatPhong(kh, phong))
                 {
                     MessageBox.Show("Thêm Hợp đồng thành công", "Thêm Hợp đồng", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
@@ -74,14 +78,15 @@ namespace QL_NhaTro
             }
             catch (Exception exception)
             {
+                throw;
                 MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void frmThemHopDong_Load(object sender, EventArgs e)
         {
-            cb_phong.DataSource = ph.GetActiveOrInActive("Hoạt động");
-            cb_phong.DisplayMember = "tên";
+            cb_phong.DataSource = ph.GetActiveOrInActive("Trống");
+            cb_phong.DisplayMember = "tenphong";
             cb_phong.ValueMember = "id";
         }
 

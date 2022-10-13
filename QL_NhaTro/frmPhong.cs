@@ -15,6 +15,7 @@ namespace QL_NhaTro
     public partial class frmPhong : Form
     {
         private Phong ph = new Phong();
+        private ThuePhong tp = new ThuePhong();
         public frmPhong()
         {
             InitializeComponent();
@@ -29,6 +30,18 @@ namespace QL_NhaTro
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             pan_kh.Controls.Clear();
+            DataTable dt = ph.GetAllKH(Convert.ToInt32(dataGridView.CurrentRow.Cells[0].Value.ToString()));
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                Label lb_kh = new Label()
+                {
+                    Text = dt.Rows[i]["ten"].ToString(),
+                    Size = new Size(279, 24),
+                    Location = new Point(0 , 15 + i * 30),
+                    TextAlign = ContentAlignment.MiddleCenter,
+                };
+                pan_kh.Controls.Add(lb_kh);
+            }
             if (dataGridView.CurrentRow.Cells[0].Value != null)
             {
                 if (!dataGridView.CurrentRow.Cells[4].Value.ToString().Equals("Xoá"))
@@ -37,7 +50,7 @@ namespace QL_NhaTro
                 tb_loaiphong.Text = dataGridView.CurrentRow.Cells[2].Value.ToString();
                 tb_tenphong.Text = dataGridView.CurrentRow.Cells[1].Value.ToString();
                 lb_id.Text = dataGridView.CurrentRow.Cells[0].Value.ToString();
-                if ((bool)dataGridView.CurrentRow.Cells[4].Value)
+                if (dataGridView.CurrentRow.Cells[4].Value.ToString() == "Trống")
                 {
                     rbtn_active.Checked = true;
                 }
@@ -110,6 +123,12 @@ namespace QL_NhaTro
                 if (gia.Trim() == "" || loaiphong.Trim() == "" || tenphong.Trim() == "")
                 {
                     MessageBox.Show("Hãy điền đầy đủ thông tin", "Cập nhật Phòng", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (tp.GetLatestRentRoom(Convert.ToInt32(lb_id.Text)).Rows.Count > 0 && trangthai.Equals("Hoạt động"))
+                {
+                    MessageBox.Show("Hãy thanh toán phòng trước khi cập nhật trạng thái thành khả dụng!", "Cập nhật Phòng", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 if (ph.Update(Convert.ToInt32(lb_id.Text), tenphong, loaiphong, Convert.ToInt32(gia), trangthai))

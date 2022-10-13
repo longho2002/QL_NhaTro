@@ -41,7 +41,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tb_lot = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.pic = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
             this.bdate = new System.Windows.Forms.DateTimePicker();
             this.radioButtonFemale = new System.Windows.Forms.RadioButton();
@@ -52,6 +51,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.pic = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pic)).BeginInit();
             this.SuspendLayout();
             // 
@@ -215,14 +215,6 @@
             this.label2.TabIndex = 194;
             this.label2.Text = "Tên lót:";
             // 
-            // pic
-            // 
-            this.pic.Location = new System.Drawing.Point(63, 143);
-            this.pic.Name = "pic";
-            this.pic.Size = new System.Drawing.Size(207, 213);
-            this.pic.TabIndex = 193;
-            this.pic.TabStop = false;
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -239,6 +231,7 @@
             this.bdate.Name = "bdate";
             this.bdate.Size = new System.Drawing.Size(219, 20);
             this.bdate.TabIndex = 191;
+            this.bdate.Value = new System.DateTime(2000, 10, 13, 7, 33, 0, 0);
             // 
             // radioButtonFemale
             // 
@@ -250,7 +243,6 @@
             this.radioButtonFemale.Name = "radioButtonFemale";
             this.radioButtonFemale.Size = new System.Drawing.Size(86, 24);
             this.radioButtonFemale.TabIndex = 190;
-            this.radioButtonFemale.TabStop = true;
             this.radioButtonFemale.Text = "Female";
             this.radioButtonFemale.UseVisualStyleBackColor = false;
             // 
@@ -258,6 +250,7 @@
             // 
             this.radioButtonMale.AutoSize = true;
             this.radioButtonMale.BackColor = System.Drawing.Color.Transparent;
+            this.radioButtonMale.Checked = true;
             this.radioButtonMale.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButtonMale.ForeColor = System.Drawing.Color.IndianRed;
             this.radioButtonMale.Location = new System.Drawing.Point(491, 268);
@@ -327,6 +320,16 @@
             this.label3.Size = new System.Drawing.Size(37, 20);
             this.label3.TabIndex = 183;
             this.label3.Text = "Họ:";
+            // 
+            // pic
+            // 
+            this.pic.Image = global::QL_NhaTro.Properties.Resources.unknowuser;
+            this.pic.Location = new System.Drawing.Point(63, 143);
+            this.pic.Name = "pic";
+            this.pic.Size = new System.Drawing.Size(207, 213);
+            this.pic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pic.TabIndex = 193;
+            this.pic.TabStop = false;
             // 
             // frmThemKH
             // 

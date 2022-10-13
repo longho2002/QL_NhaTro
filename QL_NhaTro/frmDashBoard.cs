@@ -17,6 +17,7 @@ namespace QL_NhaTro
         public frmDashBoard()
         {
             InitializeComponent();
+            OpenChildForm(new frmTongQuan(), btn_tongquan);
         }
         private void OpenChildForm(Form childForm, object btnSender)
         {

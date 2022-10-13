@@ -34,10 +34,8 @@
             this.tb_tien = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.ngtra = new System.Windows.Forms.DateTimePicker();
-            this.tb_Phone = new System.Windows.Forms.TextBox();
             this.tb_kh = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btn_huy = new Guna.UI2.WinForms.Guna2Button();
             this.btn_them = new Guna.UI2.WinForms.Guna2Button();
@@ -79,7 +77,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Crimson;
-            this.label12.Location = new System.Drawing.Point(51, 197);
+            this.label12.Location = new System.Drawing.Point(52, 229);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(136, 20);
             this.label12.TabIndex = 206;
@@ -89,7 +87,7 @@
             // tb_tien
             // 
             this.tb_tien.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_tien.Location = new System.Drawing.Point(204, 285);
+            this.tb_tien.Location = new System.Drawing.Point(204, 255);
             this.tb_tien.Name = "tb_tien";
             this.tb_tien.Size = new System.Drawing.Size(218, 26);
             this.tb_tien.TabIndex = 200;
@@ -108,20 +106,11 @@
             // 
             // ngtra
             // 
-            this.ngtra.Location = new System.Drawing.Point(203, 197);
+            this.ngtra.Location = new System.Drawing.Point(204, 229);
             this.ngtra.Name = "ngtra";
             this.ngtra.Size = new System.Drawing.Size(219, 20);
             this.ngtra.TabIndex = 191;
             this.ngtra.ValueChanged += new System.EventHandler(this.ngtra_ValueChanged);
-            // 
-            // tb_Phone
-            // 
-            this.tb_Phone.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_Phone.Location = new System.Drawing.Point(204, 253);
-            this.tb_Phone.Name = "tb_Phone";
-            this.tb_Phone.Size = new System.Drawing.Size(219, 26);
-            this.tb_Phone.TabIndex = 188;
-            this.tb_Phone.TextChanged += new System.EventHandler(this.tb_Phone_TextChanged);
             // 
             // tb_kh
             // 
@@ -138,24 +127,12 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Crimson;
-            this.label7.Location = new System.Drawing.Point(51, 291);
+            this.label7.Location = new System.Drawing.Point(51, 261);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(83, 20);
             this.label7.TabIndex = 186;
             this.label7.Text = "Giá thuê:";
             this.label7.Click += new System.EventHandler(this.label7_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Crimson;
-            this.label6.Location = new System.Drawing.Point(51, 259);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(120, 20);
-            this.label6.TabIndex = 185;
-            this.label6.Text = "Số điện thoại:";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label3
             // 
@@ -181,7 +158,7 @@
             this.btn_huy.ForeColor = System.Drawing.Color.White;
             this.btn_huy.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(109)))), ((int)(((byte)(228)))));
             this.btn_huy.HoverState.Parent = this.btn_huy;
-            this.btn_huy.Location = new System.Drawing.Point(102, 374);
+            this.btn_huy.Location = new System.Drawing.Point(102, 344);
             this.btn_huy.Name = "btn_huy";
             this.btn_huy.ShadowDecoration.Parent = this.btn_huy;
             this.btn_huy.Size = new System.Drawing.Size(133, 45);
@@ -201,7 +178,7 @@
             this.btn_them.ForeColor = System.Drawing.Color.White;
             this.btn_them.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(109)))), ((int)(((byte)(228)))));
             this.btn_them.HoverState.Parent = this.btn_them;
-            this.btn_them.Location = new System.Drawing.Point(268, 374);
+            this.btn_them.Location = new System.Drawing.Point(268, 344);
             this.btn_them.Name = "btn_them";
             this.btn_them.ShadowDecoration.Parent = this.btn_them;
             this.btn_them.Size = new System.Drawing.Size(133, 45);
@@ -214,7 +191,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Crimson;
-            this.label1.Location = new System.Drawing.Point(52, 227);
+            this.label1.Location = new System.Drawing.Point(52, 203);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(95, 20);
             this.label1.TabIndex = 213;
@@ -223,7 +200,7 @@
             // 
             // ngthue
             // 
-            this.ngthue.Location = new System.Drawing.Point(204, 227);
+            this.ngthue.Location = new System.Drawing.Point(204, 203);
             this.ngthue.Name = "ngthue";
             this.ngthue.Size = new System.Drawing.Size(219, 20);
             this.ngthue.TabIndex = 212;
@@ -252,7 +229,7 @@
             // tb_coc
             // 
             this.tb_coc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_coc.Location = new System.Drawing.Point(203, 317);
+            this.tb_coc.Location = new System.Drawing.Point(203, 287);
             this.tb_coc.Name = "tb_coc";
             this.tb_coc.Size = new System.Drawing.Size(218, 26);
             this.tb_coc.TabIndex = 216;
@@ -263,7 +240,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Crimson;
-            this.label2.Location = new System.Drawing.Point(50, 323);
+            this.label2.Location = new System.Drawing.Point(50, 293);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(112, 20);
             this.label2.TabIndex = 215;
@@ -275,7 +252,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.BurlyWood;
-            this.ClientSize = new System.Drawing.Size(504, 475);
+            this.ClientSize = new System.Drawing.Size(502, 428);
             this.Controls.Add(this.tb_coc);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btn_dskh);
@@ -289,12 +266,11 @@
             this.Controls.Add(this.tb_tien);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.ngtra);
-            this.Controls.Add(this.tb_Phone);
             this.Controls.Add(this.tb_kh);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.label3);
             this.Name = "frmThemHopDong";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmThemHopDong";
             this.Load += new System.EventHandler(this.frmThemHopDong_Load);
             this.ResumeLayout(false);
@@ -310,10 +286,8 @@
         public System.Windows.Forms.TextBox tb_tien;
         private System.Windows.Forms.Label label8;
         public System.Windows.Forms.DateTimePicker ngtra;
-        public System.Windows.Forms.TextBox tb_Phone;
         public System.Windows.Forms.TextBox tb_kh;
         protected System.Windows.Forms.Label label7;
-        protected System.Windows.Forms.Label label6;
         protected System.Windows.Forms.Label label3;
         internal Guna.UI2.WinForms.Guna2Button btn_huy;
         internal Guna.UI2.WinForms.Guna2Button btn_them;

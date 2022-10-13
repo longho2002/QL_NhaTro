@@ -49,8 +49,8 @@ namespace QL_NhaTro
                 DateTime nsinh = bdate.Value;
                 bool gioitinh = radioButtonMale.Checked ? true : false;
                 string sdt = tb_Phone.Text;
-                bool trangthai = cb_trangthai.SelectedText.Equals("Còn ở") ? true : false;
-                int phong = int.Parse(cb_phong.SelectedValue.ToString());
+                bool trangthai = cb_trangthai.SelectedItem != null && cb_trangthai.SelectedItem.ToString().Equals("Còn ở") ? true : false;
+                int phong = cb_phong.SelectedValue == null ? -1 : int.Parse(cb_phong.SelectedValue.ToString());
                 MemoryStream img = new MemoryStream();
                 pic.Image.Save(img, pic.Image.RawFormat);
 
@@ -60,7 +60,7 @@ namespace QL_NhaTro
                     MessageBox.Show("Hãy điền đầy đủ thông tin", "Cập nhật khách hàng", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                if (kh.update(int.Parse(lb_id.Text), phong, ho, lot, ten, cmnd, nsinh, gioitinh, sdt, quequan, img, trangthai))
+                if (kh.update(Globals.idKH.Value, phong, ho, lot, ten, cmnd, nsinh, gioitinh, sdt, quequan, img, trangthai))
                 {
                     MessageBox.Show("Cập nhật khách hàng thành công", "Cập nhật khách hàng", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
@@ -82,9 +82,8 @@ namespace QL_NhaTro
         {
             try
             {
-                int studentId = Convert.ToInt32(lb_id.Text);
                 if ((MessageBox.Show("Bạn có chắc xoá khách hàng này", "Xoá khách hàng", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes))
-                    if (kh.delete(studentId))
+                    if (kh.delete(Globals.idKH.Value))
                     {
                         MessageBox.Show("Xoá khách hàng thành công", "Xoá khách hàng", MessageBoxButtons.OK,
                             MessageBoxIcon
@@ -126,10 +125,12 @@ namespace QL_NhaTro
 
             if ((bool)khTable.Rows[0]["trangthai"])
             {
+                cb_trangthai.SelectedValue = 0;
                 cb_trangthai.SelectedIndex = 0;
             }
             else
             {
+                cb_trangthai.SelectedValue = 1;
                 cb_trangthai.SelectedIndex = 1;
             }
 
@@ -143,131 +144,6 @@ namespace QL_NhaTro
             data = khTable.Rows[0]["anh"].ToString() == "" ? System.IO.File.ReadAllBytes((Application.StartupPath + "\\Resources\\" + "unknowuser.png")) : (Byte[])(khTable.Rows[0]["anh"]);
             MemoryStream mem = new MemoryStream(data);
             pic.Image = Image.FromStream(mem);
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cb_trangthai_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cb_phong_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lb_id_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tb_quequan_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tb_cmnd_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tb_ten_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tb_lot_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pic_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bdate_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radioButtonFemale_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radioButtonMale_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tb_Phone_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tb_ho_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

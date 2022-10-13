@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,6 +18,7 @@ namespace QL_NhaTro
         private Phong ph = new Phong();
         private HoaDon hd = new HoaDon();
         private DB db = new DB();
+        private KhachHang khang = new KhachHang();
         public frmThongTinHopDong()
         {
             InitializeComponent();
@@ -27,8 +29,8 @@ namespace QL_NhaTro
             try
             {
                 DataTable dt = tp.Get(Globals.idHopDong.Value);
-                tb_kh.Text = dt.Rows[0]["khachhang"].ToString();
-                cb_phong.DataSource = ph.GetActiveOrInActive("Hoạt động");
+                tb_kh.Text = dt.Rows[0]["idKH"].ToString();
+                cb_phong.DataSource = ph.Get(Convert.ToInt32(dt.Rows[0]["idPhong"].ToString()));
                 cb_phong.DisplayMember = "ten";
                 cb_phong.ValueMember = "id";
                 ngthue.Value = (DateTime)dt.Rows[0]["ngaythue"];
@@ -72,7 +74,6 @@ namespace QL_NhaTro
                 MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void btn_them_Click(object sender, EventArgs e)
         {
             try
@@ -83,7 +84,7 @@ namespace QL_NhaTro
                     return;
                 }
 
-                if ((ngthue.Value - ngtra.Value).TotalDays < 180)
+                if ((ngtra.Value - ngthue.Value).TotalDays < 180)
                 {
                     MessageBox.Show("Ngày trả phải lớn hơn ngày thuê 180 ngày (6 tháng)", "Cập nhật Hợp đồng", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -140,12 +141,15 @@ namespace QL_NhaTro
         }
         private void btn_traphong_Click(object sender, EventArgs e)
         {
+            db.openConnection();
             SqlTransaction transaction;
             transaction = db.getConnection.BeginTransaction();
             try
             {
                 if ((MessageBox.Show("Bạn có chắc kết thúc không", "Trả phòng", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes))
-                    if (tp.TraPhong(Globals.idHopDong.Value) && ph.UpdateTrangthai((int)cb_phong.SelectedValue, "Trống"))
+                    if (tp.TraPhong(Globals.idHopDong.Value)
+                        && ph.UpdateTrangthai((int)cb_phong.SelectedValue, "Trống")
+                        && khang.TraPhong((int)cb_phong.SelectedValue))
                     {
                         MessageBox.Show("Trả phòng thành công", "Trả phòng", MessageBoxButtons.OK,
                             MessageBoxIcon
@@ -165,5 +169,6 @@ namespace QL_NhaTro
             }
             db.closeConnection();
         }
+
     }
 }

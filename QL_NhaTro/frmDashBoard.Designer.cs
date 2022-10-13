@@ -34,8 +34,8 @@
             this.guna2ControlBox3 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.guna2ControlBox1 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.subpanel = new Guna.UI2.WinForms.Guna2GradientPanel();
-            this.label5 = new System.Windows.Forms.Label();
             this.lb_hienthi = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.mainPan = new System.Windows.Forms.Panel();
             this.guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -110,6 +110,16 @@
             this.subpanel.Size = new System.Drawing.Size(945, 117);
             this.subpanel.TabIndex = 11;
             // 
+            // lb_hienthi
+            // 
+            this.lb_hienthi.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold);
+            this.lb_hienthi.Location = new System.Drawing.Point(0, 53);
+            this.lb_hienthi.Name = "lb_hienthi";
+            this.lb_hienthi.Size = new System.Drawing.Size(945, 47);
+            this.lb_hienthi.TabIndex = 51;
+            this.lb_hienthi.Text = "Tổng quan";
+            this.lb_hienthi.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -122,16 +132,6 @@
             this.label5.Size = new System.Drawing.Size(262, 41);
             this.label5.TabIndex = 50;
             this.label5.Text = "Quản lý nhà trọ ";
-            // 
-            // lb_hienthi
-            // 
-            this.lb_hienthi.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold);
-            this.lb_hienthi.Location = new System.Drawing.Point(0, 53);
-            this.lb_hienthi.Name = "lb_hienthi";
-            this.lb_hienthi.Size = new System.Drawing.Size(945, 47);
-            this.lb_hienthi.TabIndex = 51;
-            this.lb_hienthi.Text = "Tổng quan";
-            this.lb_hienthi.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // mainPan
             // 
@@ -333,6 +333,7 @@
             this.Controls.Add(this.Pan_Menu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmDashBoard";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmDashBoard";
             this.Pan_Menu.ResumeLayout(false);
             this.subpanel.ResumeLayout(false);

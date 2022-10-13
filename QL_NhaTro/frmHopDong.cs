@@ -17,6 +17,7 @@ namespace QL_NhaTro
         public frmHopDong()
         {
             InitializeComponent();
+            dataGridView.AutoGenerateColumns = false;
             dataGridView.Columns[5].DefaultCellStyle.Format = "MM/dd/yyyy";
             dataGridView.Columns[6].DefaultCellStyle.Format = "MM/dd/yyyy";
         }
@@ -24,29 +25,22 @@ namespace QL_NhaTro
         {
             frmThemHopDong a = new frmThemHopDong();
             a.ShowDialog();
+            fillGrid();
         }
-        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dataGridView.CurrentRow != null && dataGridView.CurrentRow.Cells[0].Value != null)
-            {
-                Globals.SetGlobalHopDongID(Convert.ToInt32(dataGridView.CurrentRow.Cells[0].Value));
-                frmThongTinHopDong a = new frmThongTinHopDong();
-                a.ShowDialog();
-                fillGrid();
-            }
-        }
+       
+
         void fillGrid()
         {
             dataGridView.DataSource = null;
             switch (option)
             {
-                case 1:
+                case 0:
                     dataGridView.DataSource = tp.GetAll(tb_search.Text);
                     break;
-                case 2:
+                case 1:
                     dataGridView.DataSource = tp.GetAll(tb_search.Text, "expired");
                     break;
-                case 3:
+                case 2:
                     dataGridView.DataSource = tp.GetAll(tb_search.Text, "Còn hạn");
                     break;
                 default:
@@ -69,6 +63,22 @@ namespace QL_NhaTro
         private void btn_datra_Click(object sender, EventArgs e)
         {
             option = 3;
+        }
+
+        private void frmHopDong_Load(object sender, EventArgs e)
+        {
+            fillGrid(); 
+        }
+
+        private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView.CurrentRow != null && dataGridView.CurrentRow.Cells[0].Value != null)
+            {
+                Globals.SetGlobalHopDongID(Convert.ToInt32(dataGridView.CurrentRow.Cells[0].Value));
+                frmThongTinHopDong a = new frmThongTinHopDong();
+                a.ShowDialog();
+                fillGrid();
+            }
         }
     }
 }

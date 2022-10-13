@@ -17,12 +17,12 @@ namespace QL_NhaTro
         {
             SqlCommand command =
                 new SqlCommand(
-                    "INSERT INTO phong ( ten, loaiphong, giasan)" +
-                    "VALUES( @ten, @loaiphong, @giasan)",
+                    "INSERT INTO phong ( tenphong, loaiphong, giasan)" +
+                    " VALUES(@ten,@loaiphong,@giasan)",
                     db.getConnection);
-            command.Parameters.Add("@giasan", SqlDbType.BigInt).Value = giasan;
-            command.Parameters.Add("@loaiphong", SqlDbType.NVarChar).Value = loaiphong;
             command.Parameters.Add("@ten", SqlDbType.NVarChar).Value = ten;
+            command.Parameters.Add("@loaiphong", SqlDbType.NVarChar).Value = loaiphong;
+            command.Parameters.Add("@giasan", SqlDbType.BigInt).Value = giasan;
             try
             {
                 db.openConnection();
@@ -54,7 +54,7 @@ namespace QL_NhaTro
             command.Parameters.Add("@giasan", SqlDbType.BigInt).Value = giasan;
             command.Parameters.Add("@loaiphong", SqlDbType.NVarChar).Value = loaiphong;
             command.Parameters.Add("@ten", SqlDbType.NVarChar).Value = ten;
-            command.Parameters.Add("@trangthai", SqlDbType.VarChar).Value = trangthai;
+            command.Parameters.Add("@trangthai", SqlDbType.NVarChar).Value = trangthai;
             try
             {
                 db.openConnection();
@@ -85,7 +85,7 @@ namespace QL_NhaTro
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("Select * from phong where id = @id", db.getConnection);
+                SqlCommand cmd = new SqlCommand("Select * from phong where id = @id or trangthai = N'Hoạt động'", db.getConnection);
                 cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
                 db.openConnection();
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
@@ -101,11 +101,20 @@ namespace QL_NhaTro
                 return null;
             }
         }
-        public DataTable GetAll(string filter)
+        public DataTable GetAll(string filter, string cond = null)
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("Select * from phong WHERE Trim(LOWER(CONCAT(loaiphong, tenphong )))" + " LIKE N'%" + filter.ToLower() + "%'", db.getConnection);
+                SqlCommand cmd;
+                if (cond == null)
+                    cmd = new SqlCommand("Select * from phong WHERE Trim(LOWER(CONCAT(loaiphong, tenphong )))" + " LIKE N'%" + filter.ToLower() + "%'", db.getConnection);
+                else
+                {
+                    cmd = new SqlCommand(
+                        "Select * from phong WHERE Trim(LOWER(CONCAT(loaiphong, tenphong )))" + " LIKE N'%" +
+                        filter.ToLower() + "%' and trangthai = @trangthai", db.getConnection);
+                    cmd.Parameters.Add("@trangthai", SqlDbType.NVarChar).Value = cond;
+                }
                 db.openConnection();
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 DataTable table = new DataTable();
@@ -182,6 +191,29 @@ namespace QL_NhaTro
             {
                 db.closeConnection();
                 return false;
+            }
+        }
+        public DataTable GetAllKH(int Id)
+        {
+            SqlCommand command = new SqlCommand(@"Select * from phong join khachhang on khachhang.phong = phong.id where phong.id = @ID and phong.trangthai = N'Bận' and khachhang.trangthai = 1", db.getConnection);
+            command.Parameters.Add("@ID", SqlDbType.Int).Value = Id;
+            try
+            {
+                db.openConnection();
+
+                db.openConnection();
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                db.closeConnection();
+                return table;
+            }
+            catch
+                (Exception e)
+            {
+                db.closeConnection();
+                MessageBox.Show(e.Message);
+                return null;
             }
         }
     }

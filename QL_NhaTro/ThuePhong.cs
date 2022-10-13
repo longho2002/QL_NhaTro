@@ -108,7 +108,7 @@ namespace QL_NhaTro
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("Select ThuePhong.id,ngaythue ,ngaytraphong ,tiendatcoc ,giathue ,ThuePhong.trangthai,ten as [tenkhachhang], tenphong,khachhang.id idKH, phong.id idPhong  from ThuePhong join KhachHang on KhachHang.id = ThuePhong.khachhang join phong on phong.id = ThuePhong.phong where id = @id", db.getConnection);
+                SqlCommand cmd = new SqlCommand("Select ThuePhong.id,ngaythue ,ngaytraphong ,tiendatcoc ,giathue ,ThuePhong.trangthai,ten as [tenkhachhang], tenphong,khachhang.id idKH, phong.id idPhong  from ThuePhong join KhachHang on KhachHang.id = ThuePhong.khachhang join phong on phong.id = ThuePhong.phong where ThuePhong.id = @id", db.getConnection);
                 cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
                 db.openConnection();
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
@@ -130,15 +130,15 @@ namespace QL_NhaTro
             {
                 SqlCommand cmd;
                 if (cond == null)
-                    cmd = new SqlCommand("Select ThuePhong.id,ngaythue ,ngaytraphong ,tiendatcoc ,giathue ,ThuePhong.trangthai,ten as [tenkhachhang], tenphong,khachhang.id idKH, phong.id idPhong  from ThuePhong join KhachHang on KhachHang.id = ThuePhong.khachhang join phong on phong.id = ThuePhong.phong WHERE Trim(LOWER(CONCAT(tenphong,ten)))" + " LIKE N'%" + filter.ToLower() + "%' order by ngaythue desc", db.getConnection);
+                    cmd = new SqlCommand("Select ThuePhong.id,ngaythue ,ngaytraphong ,tiendatcoc ,giathue ,loaiphong,ThuePhong.trangthai,ten as [tenkhachhang], tenphong,khachhang.id idKH, phong.id idPhong  from ThuePhong join KhachHang on KhachHang.id = ThuePhong.khachhang join phong on phong.id = ThuePhong.phong WHERE Trim(LOWER(CONCAT(tenphong,ten)))" + " LIKE N'%" + filter.ToLower() + "%' order by ngaythue desc", db.getConnection);
                 else if (cond.Equals("expired"))
                 {
-                    cmd = new SqlCommand("Select ThuePhong.id,ngaythue ,ngaytraphong ,tiendatcoc ,giathue ,ThuePhong.trangthai,ten as [tenkhachhang], tenphong,khachhang.id idKH, phong.id idPhong  from ThuePhong join KhachHang on KhachHang.id = ThuePhong.khachhang join phong on phong.id = ThuePhong.phong WHERE Trim(LOWER(CONCAT(tenphong,ten)))" + " LIKE N'%" + filter.ToLower() + "%' and ngaytraphong < GETDATE() order by ngaythue desc", db.getConnection);
+                    cmd = new SqlCommand("Select ThuePhong.id,ngaythue ,ngaytraphong ,tiendatcoc ,giathue,loaiphong ,ThuePhong.trangthai,ten as [tenkhachhang], tenphong,khachhang.id idKH, phong.id idPhong  from ThuePhong join KhachHang on KhachHang.id = ThuePhong.khachhang join phong on phong.id = ThuePhong.phong WHERE Trim(LOWER(CONCAT(tenphong,ten)))" + " LIKE N'%" + filter.ToLower() + "%' and ngaytraphong < GETDATE() order by ngaythue desc", db.getConnection);
                 }
                 else
                 {
-                    cmd = new SqlCommand("Select ThuePhong.id,ngaythue ,ngaytraphong ,tiendatcoc ,giathue ,ThuePhong.trangthai,ten as [tenkhachhang], tenphong,khachhang.id idKH, phong.id idPhong  from ThuePhong join KhachHang on KhachHang.id = ThuePhong.khachhang join phong on phong.id = ThuePhong.phong WHERE Trim(LOWER(CONCAT(tenphong,ten)))" + " LIKE N'%" + filter.ToLower() + "%' and trangthai = @trangthai order by ngaythue desc", db.getConnection);
-                    cmd.Parameters.Add("@trangthai", SqlDbType.Bit).Value = cond;
+                    cmd = new SqlCommand("Select ThuePhong.id,ngaythue ,ngaytraphong ,tiendatcoc,loaiphong ,giathue ,ThuePhong.trangthai,ten as [tenkhachhang], tenphong,khachhang.id idKH, phong.id idPhong  from ThuePhong join KhachHang on KhachHang.id = ThuePhong.khachhang join phong on phong.id = ThuePhong.phong WHERE Trim(LOWER(CONCAT(tenphong,ten)))" + " LIKE N'%" + filter.ToLower() + "%' and thuephong.trangthai = @trangthai order by ngaythue desc", db.getConnection);
+                    cmd.Parameters.Add("@trangthai", SqlDbType.NVarChar).Value = cond;
                 }
                 db.openConnection();
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
@@ -160,7 +160,7 @@ namespace QL_NhaTro
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("Select ThuePhong.id,ngaythue ,ngaytraphong ,tiendatcoc ,giathue ,ThuePhong.trangthai,ten as [tenkhachhang], tenphong,khachhang.id idKH, phong.id idPhong  from ThuePhong join KhachHang on KhachHang.id = ThuePhong.khachhang join phong on phong.id = ThuePhong.phong where trangthai = @trangthai order by ngaythue desc", db.getConnection);
+                SqlCommand cmd = new SqlCommand("Select ThuePhong.id,ngaythue ,ngaytraphong ,tiendatcoc ,giathue ,ThuePhong.trangthai,ten as [tenkhachhang], tenphong,khachhang.id idKH, phong.id idPhong  from ThuePhong join KhachHang on KhachHang.id = ThuePhong.khachhang join phong on phong.id = ThuePhong.phong where ThuePhong.trangthai = @trangthai order by ngaythue desc", db.getConnection);
                 cmd.Parameters.Add("@trangthai", SqlDbType.NVarChar).Value = trangthai ;
                 db.openConnection();
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
@@ -200,7 +200,7 @@ namespace QL_NhaTro
                 new SqlCommand(
                     "UPDATE ThuePhong SET ngaytraphong=@ngtra where id=@id",
                     db.getConnection);
-            command.Parameters.Add("@ngthue", SqlDbType.Date).Value = ngay;
+            command.Parameters.Add("@ngtra", SqlDbType.Date).Value = ngay;
             command.Parameters.Add("@id", SqlDbType.Int).Value = Id;
             try
             {
@@ -223,14 +223,13 @@ namespace QL_NhaTro
                 return false;
             }
         }
-
         public bool TraPhong(int Id)
         {
             SqlCommand command =
                 new SqlCommand(
                     "UPDATE ThuePhong SET trangthai=@trangthai where id=@id",
                     db.getConnection);
-            command.Parameters.Add("@trangthai", SqlDbType.Date).Value = "Hết hiệu lực";
+            command.Parameters.Add("@trangthai", SqlDbType.NVarChar).Value = "Hết hiệu lực";
             command.Parameters.Add("@id", SqlDbType.Int).Value = Id;
             try
             {
@@ -253,5 +252,31 @@ namespace QL_NhaTro
                 return false;
             }
         }
+        public DataTable GetLatestRentRoom(int phong)
+        {
+            SqlCommand command =
+                new SqlCommand(
+                    "Select top(1) thuephong.id id_thuephong, ngaythue from ThuePhong join phong on phong.id = ThuePhong.phong where  phong.id = @phong and ThuePhong.trangthai = N'Còn hạn' order by ngaythue desc",
+                    db.getConnection);
+            command.Parameters.Add("@phong", SqlDbType.Int).Value = phong;
+            try
+            {
+                db.openConnection();
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                db.closeConnection();
+                return table;
+            }
+            catch (Exception e)
+            {
+                db.closeConnection();
+                MessageBox.Show(e.Message);
+                return null;
+            }
+        }
+
+      
+
     }
 }

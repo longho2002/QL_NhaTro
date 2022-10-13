@@ -24,7 +24,7 @@ namespace QL_NhaTro
         {
             SqlCommand command =
                 new SqlCommand(
-                    "INSERT INTO khachhang ( ho, tendem, ten, cmnd, nsinh, gioitinh, dienthoai, quequan, phong)" +
+                    "INSERT INTO khachhang ( ho, tendem, ten, cmnd, nsinh, gioitinh, dienthoai, quequan, anh, phong)" +
                     "VALUES( @ho, @tendem, @ten,@cmnd, @nsinh, @gioitinh, @dienthoai, @quequan, @picture, @phong)",
                     db.getConnection);
             command.Parameters.Add("@ho", SqlDbType.NVarChar).Value = ho;
@@ -36,7 +36,7 @@ namespace QL_NhaTro
             command.Parameters.Add("@dienthoai", SqlDbType.VarChar).Value = dienthoai;
             command.Parameters.Add("@quequan", SqlDbType.NVarChar).Value = quequan;
             command.Parameters.Add("@picture", SqlDbType.Image).Value = picture.ToArray();
-            command.Parameters.Add("@giophongitinh", SqlDbType.Int).Value = phong;
+            command.Parameters.Add("@phong", SqlDbType.Int).Value = phong;
             try
             {
                 db.openConnection();
@@ -59,50 +59,30 @@ namespace QL_NhaTro
             }
         }
 
-        private string execCount(string query)
-        {
-            SqlCommand cmd = new SqlCommand(query, db.getConnection);
-            db.openConnection();
-            String count = cmd.ExecuteScalar().ToString();
-            db.closeConnection();
-            return count;
-        }
-
-        internal object totalFemale()
-        {
-            return execCount("SELECT COUNT(*) FROM khachhang WHERE GENDER = 'Female'");
-        }
-
-        internal object totalMale()
-        {
-            return execCount("SELECT COUNT(*) FROM khachhang WHERE GENDER = 'Male'");
-        }
-
-        internal object tongKH()
-        {
-            return execCount("SELECT COUNT(*) FROM khachhang");
-        }
-
         public bool update(int Id, int phong, string ho, string tendem, string ten, string cmnd, DateTime nsinh,
             bool gioitinh, string dienthoai, string quequan,
             MemoryStream picture, bool trangthai)
         {
             SqlCommand command =
                 new SqlCommand(
-                    "UPDATE khachhang SET ho= @ho,phong=@phong, tendem=@tendem,ten= @ten,cmnd=@cmnd,nsinh= @nsinh, gioitinh=@gioitinh, dienthoai=@dienthoai, quequan=@quequan, picture=@picture,trangthai=@trangthai where id=@id",
+                    "UPDATE khachhang SET ho= @ho,phong=@phong, tendem=@tendem,ten= @ten,cmnd=@cmnd,nsinh= @nsinh, gioitinh=@gioitinh, dienthoai=@dienthoai, quequan=@quequan, anh=@picture,trangthai=@trangthai where id=@id",
                     db.getConnection);
             command.Parameters.Add("@id", SqlDbType.Int).Value = Id;
-            command.Parameters.Add("@phong", SqlDbType.Int).Value = phong;
+            if (phong == -1)
+                command.Parameters.Add("@phong", SqlDbType.Int).Value = DBNull.Value;
+            else
+                command.Parameters.Add("@phong", SqlDbType.Int).Value = phong;
             command.Parameters.Add("@ho", SqlDbType.NVarChar).Value = ho;
             command.Parameters.Add("@tendem", SqlDbType.NVarChar).Value = tendem;
             command.Parameters.Add("@ten", SqlDbType.NVarChar).Value = ten;
-            command.Parameters.Add("@cmnd", SqlDbType.NVarChar).Value = cmnd;
+            command.Parameters.Add("@cmnd", SqlDbType.VarChar).Value = cmnd;
             command.Parameters.Add("@nsinh", SqlDbType.Date).Value = nsinh;
             command.Parameters.Add("@gioitinh", SqlDbType.Bit).Value = gioitinh;
             command.Parameters.Add("@dienthoai", SqlDbType.VarChar).Value = dienthoai;
             command.Parameters.Add("@quequan", SqlDbType.NVarChar).Value = quequan;
             command.Parameters.Add("@picture", SqlDbType.Image).Value = picture.ToArray();
             command.Parameters.Add("@trangthai", SqlDbType.Bit).Value = trangthai;
+
             try
             {
                 db.openConnection();
@@ -119,6 +99,7 @@ namespace QL_NhaTro
             }
             catch (Exception e)
             {
+                throw;
                 db.closeConnection();
                 MessageBox.Show(e.Message);
                 return false;
@@ -172,7 +153,61 @@ namespace QL_NhaTro
                 return null;
             }
         }
+        public bool CapNhatPhong(int Id, int room)
+        {
+            SqlCommand command = new SqlCommand(@"UPDATE khachhang SET phong = @room where  id=@id", db.getConnection);
+            command.Parameters.Add("@ID", SqlDbType.Int).Value = Id;
+            command.Parameters.Add("@room", SqlDbType.Int).Value = room;
+            db.openConnection();
+            try
+            {
+                db.openConnection();
+                if ((command.ExecuteNonQuery() == 1))
+                {
+                    db.closeConnection();
+                    return true;
+                }
+                else
+                {
+                    db.closeConnection();
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                db.closeConnection();
+                MessageBox.Show(e.Message);
+                return false;
+            }
 
+        }
+        public bool TraPhong(int phong)
+        {
+            SqlCommand command = new SqlCommand(@"UPDATE khachhang SET trangthai = 0 where phong=@id and trangthai = 1", db.getConnection);
+            command.Parameters.Add("@ID", SqlDbType.Int).Value = phong;
+            db.openConnection();
+            try
+            {
+                db.openConnection();
+                if ((command.ExecuteNonQuery() == 1))
+                {
+                    db.closeConnection();
+                    return true;
+                }
+                else
+                {
+                    db.closeConnection();
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                db.closeConnection();
+                MessageBox.Show(e.Message);
+                return false;
+            }
+
+        }
         public DataTable getAll(string filter)
         {
             try
