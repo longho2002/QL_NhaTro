@@ -37,13 +37,14 @@ namespace QL_NhaTro
 
         }
 
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        private void btn_tim_Click(object sender, EventArgs e)
         {
             if (dateTimePicker1.Value.Year == currentYear)
             {
                 return;
             }
-            currentYear = dateTimePicker1.Value.Year;
+            else
+                currentYear = dateTimePicker1.Value.Year;
             chart1.DataSource = null;
             chart1.Series.Clear();
             DataTable dtb = hd.thongkeDoanhThu(dateTimePicker1.Value);
@@ -51,7 +52,11 @@ namespace QL_NhaTro
             {
                 lb_tb.Visible = false;
                 chart1.DataSource = dtb;
-                chart1.Series[0].Name = "Tháng";
+                chart1.Series.Add( new Series()
+                {
+                    Name = "Tháng"
+                });
+                // chart1.Series[0].;
                 foreach (DataRow item in dtb.Rows)
                 {
                     chart1.Series["Tháng"].Points.AddXY(item["Mnth"].ToString(), item["tong"].ToString());

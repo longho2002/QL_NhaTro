@@ -85,7 +85,7 @@ namespace QL_NhaTro
 
         private void frmThemHopDong_Load(object sender, EventArgs e)
         {
-            cb_phong.DataSource = ph.GetActiveOrInActive("Trống");
+            cb_phong.DataSource = ph.GetActiveOrInActive("Bận");
             cb_phong.DisplayMember = "tenphong";
             cb_phong.ValueMember = "id";
         }

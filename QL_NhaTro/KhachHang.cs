@@ -99,7 +99,6 @@ namespace QL_NhaTro
             }
             catch (Exception e)
             {
-                throw;
                 db.closeConnection();
                 MessageBox.Show(e.Message);
                 return false;
@@ -108,7 +107,7 @@ namespace QL_NhaTro
 
         public bool delete(int Id)
         {
-            SqlCommand command = new SqlCommand(@"UPDATE khachhang SET status = 0 where  id=@id", db.getConnection);
+            SqlCommand command = new SqlCommand(@"UPDATE khachhang SET trangthai = 0 where  id=@id", db.getConnection);
             command.Parameters.Add("@ID", SqlDbType.Int).Value = Id;
             db.openConnection();
             try
@@ -236,7 +235,7 @@ namespace QL_NhaTro
             try
             {
                 SqlCommand cmd = new SqlCommand("Select * from khachhang where trangthai = @trangthai", db.getConnection);
-                cmd.Parameters.Add("@status", SqlDbType.Bit).Value = trangthai ? "1" : "0";
+                cmd.Parameters.Add("@trangthai", SqlDbType.Bit).Value = trangthai ? "1" : "0";
                 db.openConnection();
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 DataTable table = new DataTable();

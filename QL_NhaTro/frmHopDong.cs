@@ -52,18 +52,22 @@ namespace QL_NhaTro
         private void btn_all_Click(object sender, EventArgs e)
         {
             option = 0;
+            fillGrid();
         }
         private void btn_hethan_Click(object sender, EventArgs e)
         {
             option = 1;
+            fillGrid();
         }
         private void btn_dangthue_Click(object sender, EventArgs e)
         {
             option = 2;
+            fillGrid();
         }
         private void btn_datra_Click(object sender, EventArgs e)
         {
             option = 3;
+            fillGrid();
         }
 
         private void frmHopDong_Load(object sender, EventArgs e)
@@ -80,6 +84,11 @@ namespace QL_NhaTro
                 a.ShowDialog();
                 fillGrid();
             }
+        }
+
+        private void tb_search_TextChanged(object sender, EventArgs e)
+        {
+            fillGrid();
         }
     }
 }

@@ -154,7 +154,7 @@
             this.tbMK.Location = new System.Drawing.Point(54, 247);
             this.tbMK.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.tbMK.Name = "tbMK";
-            this.tbMK.PasswordChar = '\0';
+            this.tbMK.PasswordChar = '*';
             this.tbMK.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.tbMK.PlaceholderText = "Password";
             this.tbMK.SelectedText = "";
