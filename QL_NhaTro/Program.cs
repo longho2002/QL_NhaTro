@@ -16,7 +16,7 @@ namespace QL_NhaTro
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmDashBoard());
+            Application.Run(new FrmLogin());
         }
     }
 }

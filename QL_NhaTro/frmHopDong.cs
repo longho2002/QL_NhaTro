@@ -20,6 +20,7 @@ namespace QL_NhaTro
             dataGridView.AutoGenerateColumns = false;
             dataGridView.Columns[5].DefaultCellStyle.Format = "MM/dd/yyyy";
             dataGridView.Columns[6].DefaultCellStyle.Format = "MM/dd/yyyy";
+            dataGridView.ReadOnly = true;
         }
         private void btn_them_Click(object sender, EventArgs e)
         {

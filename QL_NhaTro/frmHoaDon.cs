@@ -18,6 +18,7 @@ namespace QL_NhaTro
         {
             InitializeComponent();
             dataGridView.AutoGenerateColumns = false;
+            dataGridView.ReadOnly = true;
         }
 
         private void btn_all_Click(object sender, EventArgs e)
@@ -48,18 +49,18 @@ namespace QL_NhaTro
                 timeTo = to.Value;
             }
             switch (option)
-                {
-                    case 0:
-                        dataGridView.DataSource = hd.GetAll(tb_search.Text);
-                        break;
-                    case 1:
-                        dataGridView.DataSource = hd.GetAll(tb_search.Text, "1");
-                        break;
-                    case 2:
-                        dataGridView.DataSource = hd.GetAll(tb_search.Text, "Còn hạn");
-                        break;
-                }
-        
+            {
+                case 0:
+                    dataGridView.DataSource = hd.GetAll(tb_search.Text, null, timeFrom, timeTo);
+                    break;
+                case 1:
+                    dataGridView.DataSource = hd.GetAll(tb_search.Text, "1", timeFrom, timeTo);
+                    break;
+                case 2:
+                    dataGridView.DataSource = hd.GetAll(tb_search.Text, "Còn hạn", timeFrom, timeTo);
+                    break;
+            }
+
         }
         private void btn_them_Click(object sender, EventArgs e)
         {

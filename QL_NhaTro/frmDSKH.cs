@@ -17,6 +17,7 @@ namespace QL_NhaTro
         {
             InitializeComponent();
             dataGridView.AutoGenerateColumns = false;
+            dataGridView.ReadOnly = true;
         }
 
         private void frmDSKH_Load(object sender, EventArgs e)
@@ -39,6 +40,11 @@ namespace QL_NhaTro
                 Globals.SetGlobalUserID(null);
             }
             this.Close();
+        }
+
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

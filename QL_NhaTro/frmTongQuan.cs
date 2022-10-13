@@ -18,6 +18,8 @@ namespace QL_NhaTro
         public frmTongQuan()
         {
             InitializeComponent();
+            DataGridView1.ReadOnly = true;
+            DataGridView2.ReadOnly = true;
         }
 
         private void frmTongQuan_Load(object sender, EventArgs e)

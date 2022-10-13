@@ -239,7 +239,7 @@
             this.btn_them.ForeColor = System.Drawing.Color.White;
             this.btn_them.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(109)))), ((int)(((byte)(228)))));
             this.btn_them.HoverState.Parent = this.btn_them;
-            this.btn_them.Location = new System.Drawing.Point(439, 488);
+            this.btn_them.Location = new System.Drawing.Point(414, 488);
             this.btn_them.Name = "btn_them";
             this.btn_them.ShadowDecoration.Parent = this.btn_them;
             this.btn_them.Size = new System.Drawing.Size(133, 45);
@@ -259,7 +259,7 @@
             this.btn_xoa.ForeColor = System.Drawing.Color.White;
             this.btn_xoa.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(109)))), ((int)(((byte)(228)))));
             this.btn_xoa.HoverState.Parent = this.btn_xoa;
-            this.btn_xoa.Location = new System.Drawing.Point(224, 488);
+            this.btn_xoa.Location = new System.Drawing.Point(199, 488);
             this.btn_xoa.Name = "btn_xoa";
             this.btn_xoa.ShadowDecoration.Parent = this.btn_xoa;
             this.btn_xoa.Size = new System.Drawing.Size(133, 45);

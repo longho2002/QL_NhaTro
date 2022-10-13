@@ -20,6 +20,7 @@ namespace QL_NhaTro
             InitializeComponent();
             datagridview.AutoGenerateColumns = false;
             datagridview.ColumnHeadersHeight = 30;
+            datagridview.ReadOnly = true;
         }
 
         private void btn_them_Click(object sender, EventArgs e)

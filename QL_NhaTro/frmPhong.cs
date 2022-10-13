@@ -20,6 +20,7 @@ namespace QL_NhaTro
         {
             InitializeComponent();
             dataGridView.AutoGenerateColumns = false;
+            dataGridView.ReadOnly = true;
         }
 
         void fillGrid()

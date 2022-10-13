@@ -19,6 +19,7 @@ namespace QL_NhaTro
         {
             InitializeComponent();
             DataGridView1.AutoGenerateColumns = false;
+            DataGridView1.ReadOnly = true;
         }
 
         private void frmLapHoaDon_Load(object sender, EventArgs e)
